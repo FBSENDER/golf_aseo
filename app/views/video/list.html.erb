@@ -1,0 +1,98 @@
+<% title @video_list_name || "高尔夫球视频"%>
+<% keywords "高尔夫球视频"%>
+<% head_desc "#{@video_list_desc}分类筛选了优质的高尔夫球视频，包含高尔夫球比赛，高尔夫球教学，高尔夫球搞笑视频等，希望能够帮助您提高高尔夫球竞技水平。"%>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <ul class="nav nav-pills nav-stacked" style="padding-top:80px">
+        <%@video_lists.each do |list|%>
+          <li><a href="/video/list/<%=list.id%>"><%=list.name%></a></li>
+      <%end%>
+      </ul>
+    </div>
+    <div class="col-md-9">
+      <%@video_lists.each do |list|%>
+        <%next if @videos.select{|item| item.video_list_id == list.id}.size == 0%>
+      <section id="list_head_<%=list.id%>">
+        <div class="page-header">
+          <h2><%=list.name%></h2>
+        </div>
+          <div class="page-header">
+            <p><%=@video_list_desc%></p>
+          </div>
+          <%@videos.select{|item| item.video_list_id == list.id}.each_with_index do |video,index|%>
+              <div class="col-md-3">
+              <div style="magin-top:20px">
+                <a href="/video/show/<%=video.id%>">
+                  <img src="<%=video.img_href%>" alt="<%=video.name%>" class="img-thumbnail img-responsive" width="120%" height="120%"/>
+                </a>
+              </div>
+              <div style="padding:5px 5px 0 5px;margin-bottom:15px">
+                <a href="/video/show/<%=video.id%>"><%=video.name%></a>
+              </div>
+            </div>
+            <%if (i   ndex > 0 && (index + 1) % 4 == 0) || index == @videos.size - 1 %>
+              <div class="clearfix"></div>
+            <%end%>
+          <%end%>
+        </section>
+      <%end%>
+      <%if !@related_keywords_list.nil? && @related_keywords_list.size > 0%>
+          <p style='font:bold 16px/18px "microsoft yahei","微软雅黑";color:black'> 下面的相关词语您可能用的到~ </p>
+        <div class="row">
+        <%distict_words = Array.new%>       
+          <div class    ="col-md-4">
+          <%@related_keywords_list.each_with_index do |rk,index|%>
+              <%if index % 3 == 0%>
+              <div class="well alert-info">
+              <h2 style='font:bold 16px/18px "microsoft yahei","微软雅黑";color:black'><i class="icon-search pull-right"></i><%=rk.keyword_string%></h2>
+              <ul>
+              <%rk.related_keywords.split(",").each do |keyword|%>
+                  <%next if distict_words.include?(keyword)%>
+                <li><%=keyword%></li>
+                <%distict_words << keyword%>
+              <%end%>
+              </ul>
+            </div>
+            <%end%>
+          <%end%>
+          </div>
+          <div class="col-md-4">
+          <%@related_keywords_list.each_with_index do |rk,index|%>
+              <%if index % 3 == 1%>
+              <div class="well alert-info">
+              <h2 style='font:bold 16px/18px "microsoft yahei","微软雅黑";color:black'><i class="icon-search pull-right"></i><%=rk.keyword_string%></h2>
+              <ul>
+              <%rk.related_keywords.split(",").each do |keyword|%>
+                  <%next if distict_words.include?(keyword)%>
+                <li><%=keyword%></li>
+                <%distict_words << keyword%>
+              <%end%>
+              </ul>
+            </div>
+            <%end%>
+          <%end%>
+          </div>
+          <div class="col-md-4">
+          <%@related_keywords_list.each_with_index do |rk,index|%>
+              <%if index % 3 == 2%>
+              <div class="well alert-info">
+              <h2 style='font:bold 16px/18px "microsoft yahei","微软雅黑";color:black'><i class="icon-search pull-right"></i><%=rk.keyword_string%></h2>
+              <ul>
+              <%rk.related_keywords.split(",").each do |keyword|%>
+                  <%next if distict_words.include?(keyword)%>
+                <li><%=keyword%></li>
+                <%distict_words << keyword%>
+              <%end%>
+              </ul>
+            </div>
+            <%end%>
+          <%end%>
+          </div>
+        </div>
+        <%end%>
+      </div>
+    </div>
+    <div id="toTop">^</div>
+  </div>

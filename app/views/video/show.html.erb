@@ -1,0 +1,108 @@
+<% title @video.name%>
+<% keywords "高尔夫球视频" %>
+<% head_desc "#{@video.name}，极好的高尔夫球视频。"%>
+<div class="container" style="padding-top:50px">
+  <div class="row">
+    <ul class="breadcrumb" style="margin-bottom:0">
+      <li><a href="http://golf.vxixi.com">高尔夫球</a> <span class="divider"></span></li>
+      <li><a href="/video/list/<%=@video.video_list_id%>"><%=@video_lists.select{|item| item.id == @video.video_list_id}.first.name%></a> <span class="divider"></span></li>
+      <li class="active"><%=@video.name%></li>
+    </ul>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <h1 style='font:bold 16px/18px "microsoft yahei","微软雅黑";color:black'><%=@video.name%></h1>
+      <embed src="<%=@video.src%>" type="application/x-shockwave-flash" allowfullscreen="true" allownetworking="all" allowscriptaccess="always" width="770" height="500"></embed>
+      <%if !@related_keywords_list.nil? && @related_keywords_list.size > 0%>
+        <p style='font:bold 16px/18px "microsoft yahei","微软雅黑";color:black'> 相关搜索 </p>
+      <div class="row">
+        <%distict_words = Array.new%>         
+        <div class="col-md-4">
+          <%@related_keywords_list.each_with_index do |rk,index|%>
+            <%if index % 3 == 0%>
+            <div class="well alert-info">
+            <h2 style='padding-top:0;font:bold 16px/18px "microsoft yahei","微软雅黑";color:black'><i class="icon-search pull-right related_search" style="cursor:pointer"  data-wd="<%=rk.keyword_string%>"></i><%=rk.keyword_string%></h2>
+            <ul>
+              <%rk.related_keywords.split(",").each do |keyword|%>
+                <%next if distict_words.include?(keyword)%>
+              <li class="related_search" data-wd="<%=keyword%>"><%=keyword%></li>
+              <%distict_words << keyword%>
+            <%end%>
+            </ul>
+          </div>
+        <%end%>
+        <%end%>
+        </div>
+        <div class="col-md-4">
+          <%@related_keywords_list.each_with_index do |rk,index|%>
+            <%if index % 3 == 1%>
+            <div class="well alert-info">
+            <h2 style='padding-top:0;font:bold 16px/18px "microsoft yahei","微软雅黑";color:black'><i class="icon-search pull-right related_search" style="cursor:pointer"  data-wd="<%=rk.keyword_string%>"></i><%=rk.keyword_string%></h2>
+            <ul>
+              <%rk.related_keywords.split(",").each do |keyword|%>
+                <%next if distict_words.include?(keyword)%>
+              <li class="related_search" data-wd="<%=keyword%>"><%=keyword%></li>
+              <%distict_words << keyword%>
+            <%end%>
+            </ul>
+          </div>
+        <%end%>
+        <%end%>
+        </div>
+        <div class="col-md-4">
+          <%@related_keywords_list.each_with_index do |rk,index|%>
+            <%if index % 3 == 2%>
+            <div class="well alert-info">
+            <h2 style='padding-top:0;font:bold 16px/18px "microsoft yahei","微软雅黑";color:black'><i class="icon-search pull-right related_search" style="cursor:pointer"  data-wd="<%=rk.keyword_string%>"></i><%=rk.keyword_string%></h2>
+            <ul>
+              <%rk.related_keywords.split(",").each do |keyword|%>
+                <%next if distict_words.include?(keyword)%>
+              <li class="related_search" data-wd="<%=keyword%>" style="cursor:pointer"><%=keyword%></li>
+              <%distict_words << keyword%>
+            <%end%>
+            </ul>
+          </div>
+        <%end%>
+        <%end%>
+        </div>
+      </div>
+    <%end%> 
+    </div>
+    <div class="col-md-4">
+      <h2 style='padding-top:0;font:bold 16px/18px "microsoft yahei","微软雅黑";color:black'> 相关视频 </h2>
+      <% @related_videos.each do |r_video|%>
+        <div class="row" style="margin-bottom:10px">
+        <div class="col-md-6">
+          <a href="/video/show/<%=r_video.id%>">
+            <img src="<%=r_video.img_href%>" alt="<%=r_video.name%>" class="img-thumbnail img-responsive"  width="150%" height="150%"/>
+          </a>
+        </div>
+        <div class="col-md-6"style="padding:10px 0 0 15px">
+          <div>
+            <a href="/video/show/<%=r_video.id%>" title="<%=r_video.name%>">
+              <%="#{r_video.name[0,25]}.."%>
+            </a>
+          </div>
+          <div style="padding-top:10px">
+            <a href='/video/list#<%="list_head_#{r_video.video_list_id}"%>'><span class="glyphicon glyphicon-list"></span> <%=@video_lists.select{|item| item.id == r_video.video_list_id}.first.name%></a>
+          </div>
+          <div style="padding-top:10px">
+            <span style="margin:0 10px 0 0"><span class="glyphicon glyphicon-play"></span> <%=r_video.pv_sum%></span>
+            <span style="margin:0 10px 0 0"><span class="glyphicon glyphicon-comment"></span> <%=[0,r_video.like_sum % 10 - 5].max%></span>
+            <span style="margin:0 10px 0 0"><span class="glyphicon glyphicon-heart"></span> <%=r_video.like_sum%></span>
+          </div>
+        </div>
+      </div>
+    <%end%>
+    </div>
+  </div>
+
+
+</div>
+<script type="text/javascript">
+$(".related_search").click(function(){
+    keyword = $(this).data("wd");
+    window.open("http://www.baidu.com/s?wd=" + encodeURIComponent(keyword))
+    })
+
+</script>

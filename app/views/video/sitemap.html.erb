@@ -1,0 +1,78 @@
+<% "高尔夫球视频列表——vxixi.com"%>
+<% keywords "高尔夫球视频，高尔夫球教学视频"%>
+<% head_desc "golf.vxixi.com站内视频列表索引页"%>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <ul class="nav nav-pills nav-stacked">
+        <%@video_lists.each do |list|%>
+          <li><a href="/video/list/<%=list.id%>"><%=list.name%></a></li>
+          <%end%>
+          </ul>
+        </div>
+        <div class="col-md-9">
+        <%if !@related_keywords_list.nil? && @related_keywords_list.size > 0%>
+            <div class="row">
+          <%distict_words = Array.new%>       
+            <div class="col-md-4">
+            <%@related_keywords_list.ea   ch_with_index do |rk,index|%>
+                <%if index % 3 == 0%>
+                <div class="well well-sm" style="background-color:transparent">
+                <h2 style='font:bold 16px/18px "microsoft yahei","微软雅黑";color:black'><span class="glyphicon glyphicon-search pull-right related_search" style="cursor:pointer"  data-wd="<%=rk.keyword_string%>"></span><%=rk.keyword_string%></h2>
+                <ul>
+                <%rk.related_keywords.split(",").each do |keyword|%>
+                    <%next if distict_words.include?(keyword)%>
+                  <li class="related_search" data-wd="<%=keyword%>"  style="cursor:pointer"><%=keyword%></li>
+                  <%distict_words << keyword%>
+                <%end%>
+                </ul>
+              </div>
+              <%end%>
+            <%end%>
+            </div>
+            <div class="col-md-4">
+            <%@related_keywords_list.each_with_index do |rk,index|%>
+                <%if index % 3 == 1%>
+                <div class="well well-sm" style="background-color:transparent">
+                <h2 style='font:bold 16px/18px "microsoft yahei","微软雅黑";color:black'><span class="glyphicon glyphicon-search pull-right related_search" style="cursor:pointer"  data-wd="<%=rk.keyword_string%>"></span><%=rk.keyword_string%></h2>
+                <ul>
+                <%rk.related_keywords.split(",").each do |keyword|%>
+                    <%next if distict_words.include?(keyword)%>
+                  <li class="related_search" data-wd="<%=keyword%>"  style="cursor:pointer"><%=keyword%></li>
+                  <%distict_words << keyword%>
+                <%end%>
+                </ul>
+              </div>
+              <%end%>
+            <%end%>
+            </div>
+            <div class="col-md-4">
+            <%@related_keywords_list.each_with_index do |rk,index|%>
+                <%if index % 3 == 2%>
+                <div class="well well-sm" style="background-color:transparent">
+                <h2 style='font:bold 16px/18px "microsoft yahei","微软雅黑";color:black'><span class="glyphicon glyphicon-search pull-right related_search" style="cursor:pointer"  data-wd="<%=rk.keyword_string%>"></span><%=rk.keyword_string%></h2>
+                <ul>
+                <%rk.related_keywords.split(",").each do |keyword|%>
+                    <%next if distict_words.include?(keyword)%>
+                  <li class="related_search" data-wd="<%=keyword%>" style="cursor:pointer"><%=keyword%></li>
+                  <%distict_words << keyword%>
+                <%end%>
+                </ul>
+              </div>
+              <%end%>
+            <%end%>
+            </div>
+          </div>
+          <%end%>
+        <   /div>
+      </div>
+      <div id="toTop">^</div>
+    </div>
+    <script type="text/javascript">
+  $(".related_search").click(function(){
+          keyword = $(this).data("wd");
+              window.open("http://www.baidu.com/s?wd=" + encodeURIComponent(keyword))
+                })
+  
+    </script>

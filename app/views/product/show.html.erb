@@ -1,0 +1,84 @@
+<% title @product.title%>
+<% keywords "高尔夫球，高尔夫球球杆，高尔夫球视频，高尔夫球教学视频，#{@product.title}" %>
+<% head_desc "#{@product.title}，高性价比高尔夫球装备，特价售卖中。"%>
+<div class="container" style="padding-top:50px">
+  <div class="row">
+    <div>
+      <ul class="breadcrumb" style="margin-bottom:0">
+        <li><a href="http://golf.vxixi.com">高尔夫球</a> <span class="divider"></span></li>
+        <li><a href="/product/show/<%=@product.id%>"><%= @product.title %></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="row">
+        <h1 style='font:bold 16px/18px "microsoft yahei","微软雅黑";color:black'><%= @product.title%></h1>
+        <div class="img-polaroid">
+          <a href="<%=@product.url%>" target="_blank" rel="nofollow">
+            <img src="<%=@product.img_3%>" title="链接到亚马逊购买~">
+          </a>
+        </div>
+        <div class="alert alert -info" style="margin-top:20px">
+          <p>产品参数</p>
+          <%unless @product.features.nil?%>
+            <% YAML.load(@product.features).each do |line|%>
+            <p><%=line%></p>
+        <%end%>
+        <%end%>
+        </div>
+        <div class="page-header" style="margin-left:0">
+        </div>
+        <div class="accordion-toggle " data-toggle="collapse" data-parent="#accordion2" href="#description">
+          <p class="muted" style="font-size:12px"><a href="#"> 来自Amazon的商品描述: </a></p>
+        </div>
+        <div id="description" class="accordion-body collapse">
+          <div style="padding-top:20px;margin-left:0">
+            <%= CGI.unescapeHTML(@product.descriptions).html_safe unless @product.descriptions.nil? %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h2 style='padding-top:0;font:bold 16px/18px "microsoft yahei","微软雅黑";color:black'> 相关商品 </h2>
+      <% @related_products.each do |r_product|%>
+        <div class="row" style="margin-bottom:10px">
+        <div class="col-md-6">
+          <a  href="<%=r_product.url%>" target="_blank" rel="nofollow">
+            <img src="<%=r_product.img_2%>" alt="<%=r_product.title%>" class="img-polaroid" style="width:180px" title="<%=r_product.title%>"/>
+          </a>
+        </div>
+        <div class="col-md-6"style="padding:10px 0 0 15px">
+          <div>
+            <a href="/product/show/<%=r_product.id%>" title="<%=r_product.title%>">
+              <%="#{r_product.title[0,25]}.."%>
+            </a>
+          </div>
+          <div style="padding-top:10px">
+            <span style="margin:0 10px 0 0">
+              <%unless r_product.features.nil?%>
+                <%= "#{(YAML.load(r_product.features).join(";"))[0,60]}.." %>
+            <%end%> 
+            </span>
+          </div>
+          <div style="padding-top:10px">
+            <%=@product.category_name%>
+          </div>
+          <div style="padding-top:10px">
+            <%=@product.brand%>
+          </div>
+        </div>
+      </div>
+    <%end%>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+$(".related_search").click(function(){
+    keyword = $(this).data("wd");
+    window.open("http://www.baidu.com/s?wd=" + encodeURIComponent(keyword))
+    })
+
+</script>
+
