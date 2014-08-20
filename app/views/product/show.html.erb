@@ -1,11 +1,11 @@
 <% title @product.title%>
-<% keywords "高尔夫球，高尔夫球球杆，高尔夫球视频，高尔夫球教学视频，#{@product.title}" %>
-<% head_desc "#{@product.title}，高性价比高尔夫球装备，特价售卖中。"%>
+<% keywords Global.product_keywords %>
+<% head_desc "#{@product.title},#{Global.product_head_desc}"%>
 <div class="container" style="padding-top:50px">
   <div class="row">
     <div>
       <ul class="breadcrumb" style="margin-bottom:0">
-        <li><a href="http://golf.vxixi.com">高尔夫球</a> <span class="divider"></span></li>
+        <li><a href="/"><%= Global.brand%></a> <span class="divider"></span></li>
         <li><a href="/product/show/<%=@product.id%>"><%= @product.title %></a></li>
       </ul>
     </div>
@@ -73,12 +73,3 @@
     </div>
   </div>
 </div>
-
-<script type="text/javascript">
-$(".related_search").click(function(){
-    keyword = $(this).data("wd");
-    window.open("http://www.baidu.com/s?wd=" + encodeURIComponent(keyword))
-    })
-
-</script>
-

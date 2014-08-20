@@ -13,3 +13,34 @@
  *= require_tree .
  *= require_self
  */
+.rule_detail li,p{
+  font-size: 20px;
+}
+.affix_menu{
+  padding-top: 80px
+}
+#toTop {
+  width:45px;
+  border:1px solid #ccc;
+  /*background:#428bca;*/
+  text-align:center;
+  position:fixed; /* this is the magic */
+  bottom:10px; /* together with this to put the div at the bottom*/
+  right:10px;
+  cursor:pointer;
+  display:none;
+  /*color:#fff;*/
+  font-family:verdana;
+  font-size:20px;
+}
+
+.div-tag{
+  margin: 0 0 15px 0;
+  padding: 10px 0 10px 0;
+  background-color: #428bca;
+  border:1px solid #fff;
+  text-align: center;
+}
+.div-tag a{
+  color: #fff;
+}

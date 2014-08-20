@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AseoRails</title>
+<title><%= yield :title%></title>
+<meta name="keywords" content="<%= yield :keywords%>">
+<meta name="descriptions" content="<%= yield :head_desc%>">
   <!-- 新 Bootstrap 核心 CSS 文件 -->
   <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <!-- 可选的Bootstrap主题文件（一般不用引入） -->
@@ -19,25 +21,11 @@
 <header class="navbar navbar-inverse">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="http://elong.com">艺龙</a>
+      <a class="navbar-brand" href="/"><%= Global.brand %></a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="/agarule/attr_set">规则管理</a></li>
-      <li class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-        批量操作 <b class="caret"></b></a>
-      <ul class="dropdown-menu">
-        <li><a href="/batch/keyword">关键词</a>
-      </ul>
-      </li>
-      <li class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-        基础数据 <b class="caret"></b></a>
-      <ul class="dropdown-menu">
-        <li><a href="/basedata/hotel">单体酒店</a>
-        <li><a href="/basedata/chain">连锁酒店</a>
-      </ul>
-      </li>
+      <li><a href="/video/list"><%= Global.brand%>视频</a></li>
+      <li><a href="/product/list"><%= Global.brand%>商品</a></li>
     </ul>
   </div>
 </header>

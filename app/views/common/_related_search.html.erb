@@ -1,0 +1,23 @@
+<%if !@related_keywords_list.nil? && @related_keywords_list.size > 0%>
+  <div class="row">
+    <p class="info_large"> 下面的相关词语您可能用的到~ </p>
+  <%used_keywords = []%>
+  <%3.times do |column|%>
+    <div class="col-md-4">
+    <%@related_keywords_list.each_with_index do |rk,index|%>
+      <%if index % 3 == column%>
+      <div class="well alert-info">
+        <h2 class="info_large"><i class="icon-search pull-right"></i><%=rk.keyword_string%></h2>
+        <ul>
+        <%rk.related_keywords.split(",").each do |keyword|%>
+          <%next if used_keywords.include?(keyword)%>
+          <%used_keywords << keyword%>
+          <li class="related_search" data-wd="<%= keyword %>"><%=keyword%></li>
+        <%end%>
+        </ul>
+      </div>
+      <%end%>
+    <%end%>
+  </div>
+  <%end%>
+<%end%>

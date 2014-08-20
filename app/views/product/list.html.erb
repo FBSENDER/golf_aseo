@@ -1,0 +1,36 @@
+<% title @category_name %>
+<% keywords @category_name %>
+<% head_desc @category_name %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <ul class="nav nav-pills nav-stacked">
+        <%@categories.each do |category|%>
+          <li><a href="/product/list/<%=category.id%>"><%=category.category_name%></a></li>
+        <%end%>
+      </ul>
+    </div>
+    <div class="col-md-9">
+      <section id="list_head_<%=@category.id%>">
+        <h2><%=@category.category_name%></h2>
+        <div class="page-header">
+          <p><%=@video_list_desc%></p>
+        </div>
+        <%@products.each_with_index do |product,index|%>
+          <div class="col-md-3">
+          <div>
+            <a href="/product/show/<%=product.id%>">
+              <img src="<%=product.img_2%>" alt="<%=product.title%>" class="img-thumbnail img-responsive" width="120%" height="120%"/>
+            </a>
+          </div>
+          <div>
+            <a href="/product/show/<%=product.id%>"><%=product.title%></a>
+          </div>
+        </div>
+        <%end%>
+      </section>
+    </div>
+  </div>
+  <%= render "common/related_search" %>
+</div>
